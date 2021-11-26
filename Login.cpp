@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -10,7 +10,12 @@ int main()
 	string username;
 	string password;
 	string repeatpassword;
-	for(bool main = false; main == false;) 
+	string usernamelog;
+	string passwordlog;
+	string inputusername;
+	string inputpassword;
+	int choiceending;
+	for (bool main = false; main == false;)
 	{
 		cout << "Welcome into login pannel" << endl;
 		cout << "What would you want to do?" << endl;
@@ -35,7 +40,7 @@ int main()
 					cout << "Your account has been created sucesfully! You can now log in!" << endl;
 					system("pause");
 					ofstream file;
-					file.open("C:/Users/user/source/repos/Login/Login/logins/" + username + ".txt");
+					file.open(username + ".txt", ios::out);
 					file << username << endl << password;
 					file.close();
 					system("CLS");
@@ -51,27 +56,47 @@ int main()
 			
 			else if (mainchoice == 2)
 			{
-				string usernamelog, passwordlog, un, pw;
 				system("CLS");
 				cout << "You've chosen to log in to account" << endl;
 				cout << "Type in your username: ";
 				cin >> usernamelog;
 				cout << "Type in your password: ";
 				cin >> passwordlog;
-
-				ifstream read("C:/Users/user/source/repos/Login/Login/logins/" + usernamelog + ".txt");
-				getline(read, un);
-				getline(read, pw);
-				if (un == username && pw == password)
+				system("cls");
+				cout << "Confirm logging in by clicking enter!";
+				ifstream read(usernamelog + ".txt");
+				getline(read, inputusername);
+				getline(read, inputpassword);
+				if (inputusername == usernamelog && inputpassword == passwordlog)
 				{
 					system("cls");
 					cout << "you succesfully logged in!" << endl;
-					main = true;
+					cout << "What would you want to do now?" << endl;
+					cout << "1 - come back to main menu\n2 - exit the program" << endl;
+					cout << "Enter your input here : ";
+					cin >> choiceending;
+					switch (choiceending)
+					{
+					case 1:
+						system("cls");
+						break;
+					case 2:
+						system("cls");
+						main = true;
+						system("pause");
+						break;
+					default:
+						system("cls");
+						cout << "Type in correct input!" << endl;
+						system("pause");
+						system("cls");
+						break;
+					}
 				}
 				else
 				{
 					system("cls");
-					cout << "You typed wrong credentials!\n Try again" << endl;
+					cout << "You typed wrong credentials!\nTry again" << endl;
 					system("pause");
 					system("cls");
 				}
